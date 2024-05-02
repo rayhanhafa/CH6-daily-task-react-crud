@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "carName": "Toyota Camry",
+    "seat": 5,
+    "category": "Sedan",
+    "price": 35000
+  },
+  {
+    "id": 2,
+    "carName": "Honda Civic",
+    "seat": 5,
+    "category": "Sedan",
+    "price": 30000
+  },
+  {
+    "id": 3,
+    "carName": "Ford Mustang",
+    "seat": 4,
+    "category": "Sports Car",
+    "price": 50000
+  },
+  {
+    "id": 4,
+    "carName": "Jeep Wrangler",
+    "seat": 4,
+    "category": "SUV",
+    "price": 40000
+  },
+  {
+    "id": 5,
+    "carName": "BMW 3 Series",
+    "seat": 5,
+    "category": "Luxury Sedan",
+    "price": 45000
+  },
+  {
+    "id": 6,
+    "carName": "Audi Q5",
+    "seat": 5,
+    "category": "Luxury SUV",
+    "price": 55000
+  },
+  {
+    "id": 7,
+    "carName": "Mercedes-Benz S-Class",
+    "seat": 5,
+    "category": "Luxury Sedan",
+    "price": 70000
+  },
+  {
+    "id": 8,
+    "carName": "Tesla Model S",
+    "seat": 5,
+    "category": "Electric",
+    "price": 80000
+  },
+  {
+    "id": 9,
+    "carName": "porsce",
+    "seat": "2",
+    "category": "super car",
+    "price": "2000000"
+  },
+  {
+    "carName": "innova",
+    "seat": "7",
+    "category": "suv",
+    "price": "200000",
+    "id": 10
+  }
+]
