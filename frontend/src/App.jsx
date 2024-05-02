@@ -37,7 +37,8 @@ const App = () => {
 
   const handleCreateCar = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/cars', newCar);
+      const newCarWithId = { ...newCar, id: cars.length + 1 }; // Automatically assign ID
+      const response = await axios.post('http://localhost:3000/cars', newCarWithId);
       const createdCar = response.data.car;
       setCars([...cars, createdCar]);
       setNewCar({
@@ -51,6 +52,7 @@ const App = () => {
       console.error('Error creating car:', error);
     }
   };
+
 
   const handleEditCar = async (id) => {
     const carToEdit = cars.find((car) => car.id === id);
@@ -82,29 +84,33 @@ const App = () => {
   return (
     <div className='container'>
       <h1>Cars List</h1>
-      <ul>
-        {cars.map((car) => (
-          <li key={car.id}>
-            <div>
-              <strong>ID:</strong> {car.id}
-            </div>
-            <div>
-              <strong>Name:</strong> {car.carName}
-            </div>
-            <div>
-              <strong>Seat:</strong> {car.seat}
-            </div>
-            <div>
-              <strong>Category:</strong> {car.category}
-            </div>
-            <div>
-              <strong>Price:</strong> {car.price}
-            </div>
-            <button onClick={() => handleEditCar(car.id)}>Edit</button>
-            <button onClick={() => handleDeleteCar(car.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Seat</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cars.map((car) => (
+            <tr key={car.id}>
+              <td>{car.id}</td>
+              <td>{car.carName}</td>
+              <td>{car.seat}</td>
+              <td>{car.category}</td>
+              <td>{car.price}</td>
+              <td>
+                <button onClick={() => handleEditCar(car.id)}>Edit</button>
+                <button onClick={() => handleDeleteCar(car.id)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <div>
         <h2>Add New Car</h2>
         <button onClick={() => setShowCreateModal(true)}>Create</button>

@@ -1,5 +1,8 @@
 /* index.css */
 
+/* index.css */
+
+/* Container Styles */
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -9,27 +12,26 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-  color: #333;
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-li {
-  margin-bottom: 10px;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+th {
+  background-color: #007bff;
+  color: #fff;
 }
 
-strong {
-  color: #555;
-}
-
+/* Button Styles */
 button {
   padding: 6px 12px;
   margin-right: 10px;
@@ -43,6 +45,7 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
 
 .modal {
   position: fixed;
