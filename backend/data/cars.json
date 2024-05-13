@@ -61,5 +61,12 @@
     "seat": "2",
     "category": "Sport Car",
     "price": "30000"
+  },
+  {
+    "carName": "Inoova",
+    "seat": "4",
+    "category": "SUV",
+    "price": "20000",
+    "id": 10
   }
 ]

@@ -54,6 +54,34 @@ const App = () => {
     }
   };
 
+  const handleEditCar = async (id) => {
+    const carToEdit = cars.find((car) => car.id === id);
+    if (carToEdit) {
+      setEditingCar(id);
+      setNewCar({ ...carToEdit }); // Set all attributes for editing
+      setShowUpdateModal(true); // Show update modal when editing
+    }
+  };
+
+  const handleUpdateCar = async () => {
+    try {
+      await axios.put(`http://localhost:3000/cars/${editingCar}`, newCar);
+      const updatedCars = cars.map((car) => (car.id === editingCar ? { ...newCar } : car));
+      setCars(updatedCars);
+      setEditingCar(null);
+      setNewCar({
+        carName: '',
+        seat: '',
+        category: '',
+        price: '',
+      });
+      setShowUpdateModal(false); // Close update modal after successful update
+    } catch (error) {
+      console.error('Error updating car:', error);
+    }
+  };
+
+
 
   const handleCreateCar = async () => {
     try {
