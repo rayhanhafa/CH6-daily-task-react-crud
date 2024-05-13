@@ -104,9 +104,9 @@ const App = () => {
                     <button onClick={() => setConfirmDelete(null)}>Cancel</button>
                   </>
                 ) : (
-                  <button onClick={() => handleDeleteCar(car.id)}>Delete</button>
+                  <button onClick={() => handleDeleteCar(car.id)} className='button danger'>Delete</button>
                 )}
-                <button onClick={() => handleEditCar(car.id)}>Edit</button>
+                <button onClick={() => handleEditCar(car.id)} className='button secondary'>Edit</button>
               </td>
             </tr>
           ))}
