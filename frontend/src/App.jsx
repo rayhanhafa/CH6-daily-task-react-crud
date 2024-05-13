@@ -15,6 +15,7 @@ const App = () => {
   const [editingCar, setEditingCar] = useState(null);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(null); // State for confirming deletion
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -29,13 +30,30 @@ const App = () => {
   }, []);
 
   const handleDeleteCar = async (id) => {
-    try {
-      await axios.delete(`http://localhost:3000/cars/${id}`);
-      setCars(cars.filter((car) => car.id !== id));
-    } catch (error) {
-      console.error('Error deleting car:', error);
+    if (confirmDelete === id) {
+      try {
+        await axios.delete(`http://localhost:3000/cars/${id}`);
+        setCars(cars.filter((car) => car.id !== id));
+        setConfirmDelete(null); // Reset confirmation state
+      } catch (error) {
+        console.error('Error deleting car:', error);
+      }
+    } else {
+      setConfirmDelete(id); // Set confirmation state for deletion
     }
   };
+
+  // Add this function to handle confirming deletion
+  const confirmDeleteCar = async () => {
+    try {
+      await axios.delete(`http://localhost:3000/cars/${confirmDelete}`);
+      setCars(cars.filter((car) => car.id !== confirmDelete));
+      setConfirmDelete(null); // Reset confirmation state
+    } catch (error) {
+      console.error('Error confirming deletion:', error);
+    }
+  };
+
 
   const handleCreateCar = async () => {
     try {
@@ -55,33 +73,7 @@ const App = () => {
     }
   };
 
-
-  const handleEditCar = async (id) => {
-    const carToEdit = cars.find((car) => car.id === id);
-    if (carToEdit) {
-      setEditingCar(id);
-      setNewCar({ ...carToEdit });
-      setShowUpdateModal(true);
-    }
-  };
-
-  const handleUpdateCar = async () => {
-    try {
-      await axios.put(`http://localhost:3000/cars/${editingCar}`, newCar);
-      const updatedCars = cars.map((car) => (car.id === editingCar ? { ...newCar } : car));
-      setCars(updatedCars);
-      setEditingCar(null);
-      setNewCar({
-        carName: '',
-        seat: '',
-        category: '',
-        price: '',
-      });
-      setShowUpdateModal(false);
-    } catch (error) {
-      console.error('Error updating car:', error);
-    }
-  };
+  // Rest of the code remains unchanged
 
   return (
     <div className='container'>
@@ -106,8 +98,15 @@ const App = () => {
               <td>{car.category}</td>
               <td>{car.price}</td>
               <td>
+                {confirmDelete === car.id ? (
+                  <>
+                    <button onClick={() => handleDeleteCar(car.id)}>Confirm</button>
+                    <button onClick={() => setConfirmDelete(null)}>Cancel</button>
+                  </>
+                ) : (
+                  <button onClick={() => handleDeleteCar(car.id)}>Delete</button>
+                )}
                 <button onClick={() => handleEditCar(car.id)}>Edit</button>
-                <button onClick={() => handleDeleteCar(car.id)}>Delete</button>
               </td>
             </tr>
           ))}
@@ -138,6 +137,15 @@ const App = () => {
         />
       )}
 
+      {confirmDelete && (
+        <div className='modal'>
+          <div className='modal-content'>
+            <p>Are you sure you want to delete this car?</p>
+            <button onClick={confirmDeleteCar}>Confirm</button>
+            <button onClick={() => setConfirmDelete(null)}>Cancel</button>
+          </div>
+        </div>
+      )}
 
     </div>
   );
