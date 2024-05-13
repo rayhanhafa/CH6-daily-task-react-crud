@@ -59,14 +59,7 @@
     "id": 9,
     "carName": "porsce",
     "seat": "2",
-    "category": "super car",
-    "price": "2000000"
-  },
-  {
-    "carName": "innova",
-    "seat": "5",
-    "category": "suv",
-    "price": "200000",
-    "id": 10
+    "category": "Sport Car",
+    "price": "30000"
   }
 ]
